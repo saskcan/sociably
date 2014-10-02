@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+	<strong><%= @user.name %></strong><br>
+	<% if @user.tags.count == 0 %>
+		You don't have any tags
+	<% else %>
+		Your Tags:&nbsp;
+		<% @user.tags.each do |tag| %>
+			<%= tag.topic.name %>
+		<% end %>
+	<% end %>
+</p>
+<p>Subscriptions: <%= @user.subscriptions.count %></p>
+<ol>
+	<% @user.subscriptions.each do |subscription| %>
+		<% if subscription.persisted? %>
+  		<li>
+  			<%= link_to(subscription.task.name, subscription) %>&nbsp;-&nbsp;(<%= number_with_precision(subscription.progress*100, precision: 0) %>%)<br>
+  			<%= subscription.created_at %>
+  		</li>
+  	<% end %>
+	<% end %>
+</ol>
+
+<% if @tasks.count > 0 %>
+	<p>Subscribe to a task</p>
+	<%= form_for @subscription do |f| %>
+		<%= f.hidden_field "user_id" %>
+		<%= f.select "task_id", options_from_collection_for_select(@tasks, "id", "name") %>
+		<%= submit_tag %>
+	<% end %>
+<% else %>
+	<p>You have already subscribed to all tasks</p>
+<% end %>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

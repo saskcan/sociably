@@ -1,0 +1,35 @@
+<%= form_for @tag, :html => {id: "NewTagForm"} do |f| %>
+  <% if @tag.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
+
+      <ul>
+      <% @tag.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.radio_button(:taggable_type, "User") %>
+    <%= f.label(:taggable_type_user, "User") %>
+    <%= f.radio_button(:taggable_type, "Task") %>
+    <%= f.label(:taggable_type_task, "Task") %>
+  </div>
+  <div class="field" id="UserSelect">
+    <%= f.label :taggable_id %><br>
+    <%= f.select "taggable_id", options_from_collection_for_select(@users, "id", "name") %>
+  </div>
+  <div class="field" id="TaskSelect">
+    <%= f.label :taggable_id %><br>
+    <%= f.select "taggable_id", options_from_collection_for_select(@tasks, "id", "name") %>
+  </div>
+  <div class="field">
+    <%= f.label :topic %><br>
+    <%= f.select "topic_id", options_from_collection_for_select(@topics, "id", "name") %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

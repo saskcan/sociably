@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+	<strong><%= @subscription.user.name%>'s subscription to <%= @subscription.task.name %>
+</p>
+
+<p>
+  <strong>Progress:</strong>
+  <%= form_for @subscription do |f| %>
+  	<%= f.number_field(:progress, in: 0.0..1.0, step: 0.05) %>
+  	<%= f.submit %>
+  <% end %>
+</p>
+
+<%= link_to 'Back to User', user_path(@subscription.user) %>

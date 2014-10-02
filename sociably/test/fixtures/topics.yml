@@ -1,0 +1,22 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+topic_one:
+  name: "Topic one"
+
+topic_two:
+  name: "Topic two"
+
+rails:
+  name: "Ruby on Rails"
+
+management:
+  name: "Project Management"
+
+css:
+  name: "Cascading Stylesheets"
+
+html:
+  name: "Hypertext Markup Language"
+
+javascript:
+  name: "Javascript"
