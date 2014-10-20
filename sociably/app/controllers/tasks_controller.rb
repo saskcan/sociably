@@ -8,17 +8,17 @@ class TasksController < ApplicationController
 
     # set 'subscribed' attr_accessor
     @tasks.each do |t|
-      if current_user.tasks.include?(t)
-        t.subscribed = true
-      else
-        t.subscribed = false
-      end
+      set_subscribed(t)
     end
   end
 
   # GET /tasks/1
   # GET /tasks/1.json
   def show
+    set_subscribed(@task)
+    if @task.subscribed
+      @subscription = Subscription.where(user_id: @user, task_id: @task).first
+    end
   end
 
   # GET /tasks/new
@@ -74,6 +74,14 @@ class TasksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_task
       @task = Task.find(params[:id])
+    end
+
+    def set_subscribed(task)
+      if current_user.tasks.include?(task)
+        task.subscribed = true
+      else
+        task.subscribed = false
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

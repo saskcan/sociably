@@ -37,5 +37,5 @@ Socially::Application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   # Load fixtures in correct order
-  ENV["FIXTURES"] ||= "users,tasks,subscriptions,topics,tags"
+  #ENV["FIXTURES"] ||= "users,tasks,subscriptions,topics,tags"
 end

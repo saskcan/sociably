@@ -1,0 +1,29 @@
+.row
+  .small-12.columns
+    %h1
+      Welcome to
+      %strong Sociably
+
+    %p
+      Sociably helps you learn by organizing your learning tasks. Set goals and schedule your time more wisely. Discover what those who share your interests are studying, too! Discover, Schedule, Motivate - Sociably!
+
+    %h2
+      Log in
+
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      %div= f.label :email
+      %br
+      = f.email_field :email, autofocus: true
+
+      %div= f.label :password
+      %br
+      = f.password_field :password, autocomplete: "off"
+
+      - if devise_mapping.rememberable?
+        %div
+          = f.check_box :remember_me
+          = f.label :remember_me
+      %div
+        = f.submit "Log in", class: "button"
+
+    = render "devise/shared/links"

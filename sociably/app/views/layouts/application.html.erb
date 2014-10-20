@@ -3,24 +3,58 @@
 <head>
   <title>Sociably</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "vendor/modernizr" %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-
 <%# show the navigation buttons for signed-in users %>
 <% if user_signed_in? %>
-	<div id="topNav">
-		<%= link_to( "My Profile", user_path(current_user) ) %>|
-		<%= link_to( "Tasks", tasks_path ) %>|
-		<%= link_to( "Log out", destroy_user_session_path, method: :delete) %>
-	</div>
+	<nav class="top-bar" data-topbar role="navigation">
+		<ul class="title-area">
+			<li class="name">
+				<h1><a href="#">Sociably</a></h1>
+			</li>
+			<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+		</ul>
+
+		<section class="top-bar-section">
+			<ul class="right">
+				<li>
+					<%= link_to( "My Profile", user_path(current_user) ) %>
+				</li>
+				<li>
+					<%= link_to( "Tasks", tasks_path ) %>
+				</li>
+				<li>
+					<%= link_to( "My Subscriptions", user_subscriptions_path(current_user) ) %>
+				</li>
+				<li>
+					<%= link_to( "Log out", destroy_user_session_path, method: :delete) %>
+				</li>
+			</ul>
+		</section>
+	</nav>
 <% end %>
 
-<%= yield %>
+<div class="row">
+	<div class = "small-12 columns">
+		<% if notice %>
+			<p class="alert-box success"><%= notice %></p>
+		<% end %>
+		<% if alert %>
+			<p class="alert-box warning"><%= alert %></p>
+		<% end %>
+	</div>
+</div>
+
+<section role="main">
+	<div class="row">
+		<%= yield %>
+	</div>
+</section>
 
 </body>
 </html>

@@ -1,21 +1,21 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-task_one:
-  name: "Task one"
-  url: "task/one/url"
-  description: "task one description"
-
-task_two:
-  name: "Task two"
-  url: "task/two/url"
-  description: "task two description"
-
-homework:
-  name: "Homework"
-  url: "homework/url"
-  description: "Science homework"
-
-cut_grass:
-  name: "Cut the Grass"
-  url: "grass/url"
-  description: "Cut the grass using the lawn tractor"
+# task_one:
+#   name: "Task one"
+#   url: "task/one/url"
+#   description: "task one description"
+# 
+# task_two:
+#   name: "Task two"
+#   url: "task/two/url"
+#   description: "task two description"
+# 
+# homework:
+#   name: "Homework"
+#   url: "homework/url"
+#   description: "Science homework"
+# 
+# cut_grass:
+#   name: "Cut the Grass"
+#   url: "grass/url"
+#   description: "Cut the grass using the lawn tractor"

@@ -1,0 +1,30 @@
+.small-12.column
+  %h1
+    = @task.name
+  %p
+    = @task.description
+  %p
+    %strong
+    Url:
+    = link_to @task.url do
+      = @task.url
+
+  -if @task.subscribed
+    %p
+      Progress:
+      = form_for @subscription do |f|
+        = f.number_field(:progress, in: 0.0..1.0, step: 0.05)
+        = f.submit
+    %p
+      Subscribed at: 
+      = @subscription.created_at.to_formatted_s(:date)
+    %p
+      Last modified:
+      = @subscription.updated_at.to_formatted_s(:date)
+  -else
+    %p
+      Subscribe Button
+
+  = link_to 'Edit', edit_task_path(@task)
+  |
+  = link_to 'Back', tasks_path 

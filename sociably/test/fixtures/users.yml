@@ -1,19 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-user_one:
-  name: "User 1"
-  email: "user1@sociably.com"
-  encrypted_password: <%= User.new.send(:password_digest, "secret123") %>
-  confirmed_at: <%= Time.now %>
-
-user_two:
-  name: "User 2"
-  email: "user2@sociably.com"
-  encrypted_password: <%= User.new.send(:password_digest, "secret123") %>
-  confirmed_at: <%= Time.now %>
-
-james:
-  name: "James"
-  email: "james@sociably.com"
-  encrypted_password: <%= User.new.send(:password_digest, "secret123") %>
-  confirmed_at: <%= Time.now %>
+# user_one:
+#   name: "User 1"
+#   email: "user1@sociably.com"
+#   encrypted_password: <%= User.new.send(:password_digest, "secret123") %>
+#   confirmed_at: <%= Time.now %>
+# 
+# user_two:
+#   name: "User 2"
+#   email: "user2@sociably.com"
+#   encrypted_password: <%= User.new.send(:password_digest, "secret123") %>
+#   confirmed_at: <%= Time.now %>
+# 
+# james:
+#   name: "James"
+#   email: "james@sociably.com"
+#   encrypted_password: <%= User.new.send(:password_digest, "secret123") %>
+#   confirmed_at: <%= Time.now %>

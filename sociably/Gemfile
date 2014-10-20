@@ -33,9 +33,20 @@ group :doc do
 end
 
 group :development, :test do
-	gem "rspec-rails", ">= 2.0.1"
+	gem "rspec-rails"
 	gem 'cucumber-rails', :require => false
 	gem 'database_cleaner'
+	gem 'factory_girl_rails'
+	# When mail is sent from your application, Letter Opener will open a preview in the browser instead of sending
+	gem 'letter_opener'
+end
+
+group :test do
+	gem 'faker'
+	gem 'capybara'
+	gem 'guard-rspec'
+	gem 'launchy'
+	gem 'mocha'
 end
 
 # Use Devise for authentication
@@ -45,7 +56,23 @@ gem 'devise'
 gem 'doorkeeper'
 
 # Use RABL for building APIs
-# gem 'rabl'
+gem 'rabl'
+
+# Create pretty URLs and work with human-friendly strings as if they were numeric ids
+gem 'friendly_id'
+
+# Active Admin is a Ruby on Rails plugin for generating administration style interfaces.
+gem 'activeadmin', github: 'activeadmin'
+
+# Haml-rails provides Haml generators for Rails 4
+gem 'haml-rails'
+
+gem 'thin'
+
+# Use Zurb Foundation for responsive front-end framework
+gem 'foundation-rails'
+
+gem 'foundation-icons-sass-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'

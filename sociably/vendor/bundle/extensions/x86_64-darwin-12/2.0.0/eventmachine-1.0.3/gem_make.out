@@ -1,0 +1,13 @@
+/Users/jamesneilson/.rvm/rubies/ruby-2.0.0-p247/bin/ruby -r ./siteconf20141014-60929-181ushh.rb extconf.rb 
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling mapper.cpp
+compiling rubymain.cpp
+linking shared-object fastfilereaderext.bundle
+
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 fastfilereaderext.bundle ./.gem.20141014-60929-mf0sl6
+installing default fastfilereaderext libraries

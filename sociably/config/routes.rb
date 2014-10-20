@@ -32,13 +32,17 @@ Socially::Application.routes.draw do
 
   resources :tags
 
-  resources :subscriptions
+#  resources :subscriptions
 
-  resources :users
+  resources :users do
+  	resources :subscriptions, except: [:new, :edit], shallow: true
+  end
 
   resources :tasks
 
-  root 'subscriptions#index'
+  devise_scope :user do
+  	root 'sessions#new'
+  end
 
 
 end

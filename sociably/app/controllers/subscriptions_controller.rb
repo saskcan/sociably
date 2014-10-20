@@ -1,12 +1,16 @@
 class SubscriptionsController < ApplicationController
-  before_action :set_subscription, only: [:show, :edit, :update, :destroy]
-  before_action :set_tasks_for_select, only: [:new, :edit]
-  before_action :check_if_subscribed_to_all, only: [:new]
+  before_action :set_subscription, only: [:show, :update, :destroy]
+  before_action :set_tasks_for_select, only: :index
+  before_action :set_subscribed_to_all, only: :index
+  before_action :set_user, only: :index
 
-  # GET /subscriptions
-  # GET /subscriptions.json
+  helper_method :sort_column, :sort_direction
+  # GET user/1/subscriptions
+  # GET user/1/subscriptions.json
   def index
-    @subscriptions = Subscription.where('user_id = ?', current_user.id)
+    @subscription = current_user.subscriptions.build()
+    @subscriptions = Subscription.where('user_id = ?', current_user.id).joins(:task).order(sort_column + " " + sort_direction)
+    @complete_subscription_count = @subscriptions.where('progress = ?', 1).count
   end
 
   # GET /subscriptions/1
@@ -14,17 +18,8 @@ class SubscriptionsController < ApplicationController
   def show
   end
 
-  # GET /subscriptions/new
-  def new
-    @subscription = Subscription.new
-  end
-
-  # GET /subscriptions/1/edit
-  def edit
-  end
-
-  # POST /subscriptions
-  # POST /subscriptions.json
+  # POST user/1/subscriptions
+  # POST user/1/subscriptions.json
   def create
     @subscription = Subscription.new(subscription_params)
     @subscription.user_id = current_user.id
@@ -45,7 +40,7 @@ class SubscriptionsController < ApplicationController
   def update
     respond_to do |format|
       if @subscription.update(subscription_params)
-        format.html { redirect_to subscriptions_path, notice: 'Subscription was successfully updated.' }
+        format.html { redirect_to user_subscriptions_path(current_user), notice: 'Subscription was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -59,7 +54,7 @@ class SubscriptionsController < ApplicationController
   def destroy
     @subscription.destroy
     respond_to do |format|
-      format.html { redirect_to subscriptions_url }
+      format.html { redirect_to user_subscriptions_url(current_user) }
       format.json { head :no_content }
     end
   end
@@ -68,6 +63,10 @@ class SubscriptionsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_subscription
       @subscription = Subscription.find(params[:id])
+    end
+
+    def set_user
+      @user = current_user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -80,9 +79,15 @@ class SubscriptionsController < ApplicationController
     end
 
     # if the user is subscribed to all the tasks, they can't access the new action
-    def check_if_subscribed_to_all
-      if current_user.tasks.count == Task.count
-        redirect_to subscriptions_path, notice: 'You are already subscribed to all the tasks.'
-      end
+    def set_subscribed_to_all
+      @subscribed_to_all = (current_user.tasks.count == Task.count)
+    end
+
+    def sort_column
+      ((Subscription.column_names.push("name")).include?(params[:sort])) ? params[:sort] : "name"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 end
