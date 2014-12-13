@@ -27,7 +27,7 @@
             = subscription.created_at.to_formatted_s(:date)
           %td
             = link_to(subscription) do
-              = subscription.task.name
+              = subscription.subscribable.display_name
           %td
             = number_with_precision(subscription.progress*100, precision: 0)
             \%
@@ -43,4 +43,11 @@
   %p
     You have subscribed to all tasks
 -else
+  %h3
+    Subscribe to another task
   = render 'form'
+
+%br/
+%h3
+  Can't find what you're looking for?
+= link_to 'Create a new task', new_task_path, class: "button"

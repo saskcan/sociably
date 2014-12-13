@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :lockable
 
 	has_many :subscriptions, dependent: :destroy
-	has_many :tasks, through: :subscriptions
+	#has_many :tasks, through: :subscriptions
 	has_many :tags, as: :taggable
 	has_many :topics, through: :tags
 

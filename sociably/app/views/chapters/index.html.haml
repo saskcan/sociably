@@ -1,0 +1,26 @@
+%h1
+	Listing Chapters for
+	=@book.title
+
+- @chapters.each do |ch|
+	%p= ch.title
+
+%h2
+	Add a new chapter
+
+= form_for [@book, @chapter] do |f|
+	- if @chapter.errors.any?
+		#error_explanation
+			%h2
+				= pluralize(@chapter.errors.count, "errors")
+				prohibited this chapter from being saved:
+
+			%ul
+				- @chapter.errors.full_message.each do |msg|
+					%li =msg
+
+	.field
+		= f.label :title
+		= f.text_field(:title)
+	.actions
+		= f.submit

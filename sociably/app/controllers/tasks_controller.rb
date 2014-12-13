@@ -17,7 +17,7 @@ class TasksController < ApplicationController
   def show
     set_subscribed(@task)
     if @task.subscribed
-      @subscription = Subscription.where(user_id: @user, task_id: @task).first
+      @subscription = Subscription.where(user: current_user, task: @task).first
     end
   end
 

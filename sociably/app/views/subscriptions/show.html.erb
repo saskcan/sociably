@@ -1,9 +1,13 @@
 <h1>
-	<%= @subscription.task.name %>
+	<%= @subscription.subscribable.display_name %>
 </h1>
 
 <p>
-	<%= @subscription.task.description %>
+	<%= @subscription.subscribable.description %>
+</p>
+
+<p>
+	<span class="label"><%# link_to(@subscription.task.url, @subscription.task.url, target: "_blank") %></span>
 </p>
 
 <p>

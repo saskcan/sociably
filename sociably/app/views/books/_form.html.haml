@@ -1,0 +1,28 @@
+= form_for @book, html: {id: "NewBookForm"} do |f|
+  - if @book.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@book.errors.count, "error")
+        prohibited this book from being saved:
+      %ul
+        - @book.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label(:title, "Title")
+    = f.text_field(:title)
+  .field
+    = f.label(:edition, "Edition")
+    = f.text_field(:edition)
+  .field
+    = f.label(:isbn, "ISBN")
+    = f.text_field(:isbn)
+  .field
+    = f.label(:publisher_id, "Publisher ID")
+    = f.text_field(:publisher_id)
+  .field
+    = f.label(:publish_date, "Date of Publishing")
+    = f.date_field(:publish_date)
+
+  .actions
+    = f.submit

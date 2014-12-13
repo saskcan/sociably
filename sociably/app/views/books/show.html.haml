@@ -1,0 +1,25 @@
+%p#notice= notice
+
+%p
+	%strong Title
+	= @book.title
+
+%p
+	%strong ISBN
+	= @book.isbn
+
+%p
+	%strong Edition
+	= @book.edition
+
+%p
+	%strong Date of Publishing
+	= @book.publish_date
+
+%p
+	%strong Publisher
+	= @book.publisher_name
+
+= link_to 'Edit', edit_book_path(@book)
+|
+= link_to 'Back to all Books', books_path

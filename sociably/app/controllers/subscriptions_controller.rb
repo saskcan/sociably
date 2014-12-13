@@ -8,9 +8,17 @@ class SubscriptionsController < ApplicationController
   # GET user/1/subscriptions
   # GET user/1/subscriptions.json
   def index
+    #@subscription = current_user.subscriptions.build()
+    @subscriptions = current_user.subscriptions.sort_by { |subscription| subscription.subscribable.display_name }
     @subscription = current_user.subscriptions.build()
-    @subscriptions = Subscription.where('user_id = ?', current_user.id).joins(:task).order(sort_column + " " + sort_direction)
-    @complete_subscription_count = @subscriptions.where('progress = ?', 1).count
+    #@subscriptions.sort_by  {|subscription| subscription.subscribable.display_name }
+    #@subscriptions = Subscription.where('user_id = ?', current_user.id).sort_by(:&title).joins(:task).order(sort_column + " " + sort_direction)
+    @complete_subscription_count = 0
+    @subscriptions.each do |s|
+      if s.progress == 1
+        @complete_subscription_count = @complete_subscription_count + 1
+      end
+    end
   end
 
   # GET /subscriptions/1
@@ -80,7 +88,7 @@ class SubscriptionsController < ApplicationController
 
     # if the user is subscribed to all the tasks, they can't access the new action
     def set_subscribed_to_all
-      @subscribed_to_all = (current_user.tasks.count == Task.count)
+      @subscribed_to_all = (current_user.subscriptions.count == Book.count + Website.count)
     end
 
     def sort_column

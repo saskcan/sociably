@@ -40,9 +40,17 @@ Socially::Application.routes.draw do
 
   resources :tasks
 
+  resources :books do
+  	resources :chapters
+  end
+
   devise_scope :user do
   	root 'sessions#new'
   end
+
+  resources :roles
+
+  resources :people
 
 
 end

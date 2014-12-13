@@ -9,12 +9,12 @@
     = link_to @task.url do
       = @task.url
 
-  -if @task.subscribed
+  -if @subscription
     %p
       Progress:
       = form_for @subscription do |f|
-        = f.number_field(:progress, in: 0.0..1.0, step: 0.05)
-        = f.submit
+        = f.number_field :progress, in: 0.0..1.0, step: 0.05
+        = f.submit "Update"
     %p
       Subscribed at: 
       = @subscription.created_at.to_formatted_s(:date)
