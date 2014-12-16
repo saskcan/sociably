@@ -18,8 +18,8 @@
     = f.label(:isbn, "ISBN")
     = f.text_field(:isbn)
   .field
-    = f.label(:publisher_id, "Publisher ID")
-    = f.text_field(:publisher_id)
+    = f.label(:publisher, "Publisher")
+    = f.select(:publisher_id, options_from_collection_for_select(@publishers, "id", "name"))
   .field
     = f.label(:publish_date, "Date of Publishing")
     = f.date_field(:publish_date)
