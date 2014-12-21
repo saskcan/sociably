@@ -29,9 +29,13 @@ Socially::Application.routes.draw do
 
   resources :books do
     resources :chapters
+    resources :contributions
   end
 
-  resources :people
+  resources :people do
+    resources :contributions
+  end
+  
   resources :publishers
   resources :roles
   resources :tags

@@ -1,0 +1,18 @@
+= form_for [@person, @contribution] do |f|
+  - if @contribution.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@contribution.errors.count, "error")} prohibited this contribution from being saved:"
+      %ul
+        - @contribution.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label(:role_id)
+    = f.select "role_id", options_from_collection_for_select(@roles, "id", "description")
+
+  .field
+    = f.label(:contributable_id)
+    = f.select "contributable_id", options_from_collection_for_select(@books, "id", "title")
+
+  .actions
+    = f.submit 'Save'

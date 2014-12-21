@@ -1,0 +1,11 @@
+%h1 
+  = @person.full_name
+%h2
+  Contributions:
+%ul
+  - @contributions.each do |c|
+    %li
+      = c.role.description
+      ,
+      =c.contributable.display_name
+%p= link_to 'New Contribution', new_person_contribution_path(@person)
